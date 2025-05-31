@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Calculadora Accesible</title>
 <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    background-color: #fff;
+    color: #000;
+  }
   #calculadora-wrapper {
     max-width: 450px;
     margin: 20px auto;
-    font-family: Arial, sans-serif;
   }
   #pantalla {
     width: 100%;
@@ -20,6 +25,7 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #f4f4f4;
+    color: #000;
   }
   #calculadora-wrapper button {
     padding: 10px;
@@ -38,21 +44,6 @@
     grid-template-columns: repeat(6, 1fr);
     gap: 5px;
   }
-  /* Estilos para accesibilidad */
-  .modo-claro #pantalla {
-    background-color: #f4f4f4;
-    color: #000;
-  }
-  .alto-contraste #pantalla {
-    background-color: black;
-    color: yellow;
-    border: 2px solid yellow;
-  }
-  .modo-sepia #pantalla {
-    background-color: #f4ecd8;
-    color: #5b4636;
-  }
-  /* Botones accesibilidad */
   #accesibilidad {
     max-width: 450px;
     margin: 0 auto 15px auto;
@@ -64,15 +55,100 @@
     color: white;
     padding: 8px 12px;
     border-radius: 5px;
+    cursor: pointer;
   }
   #accesibilidad button:hover {
     background: #005c8a;
+  }
+  footer {
+    text-align: center;
+    margin-top: 30px;
+    font-family: Arial, sans-serif;
+  }
+  footer a {
+    background-color: #0070ba;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  footer a:hover {
+    background-color: #005c8a;
+  }
+
+  /* Modos accesibles para todo el body */
+
+  body.modo-claro {
+    background-color: #fff;
+    color: #000;
+  }
+  body.modo-claro #pantalla {
+    background-color: #f4f4f4;
+    color: #000;
+    border-color: #ccc;
+  }
+  body.modo-claro #calculadora-wrapper button {
+    background: #444;
+    color: white;
+  }
+  body.modo-claro #calculadora-wrapper button:hover {
+    background: #666;
+  }
+
+  body.alto-contraste {
+    background-color: black;
+    color: yellow;
+  }
+  body.alto-contraste #pantalla {
+    background-color: black;
+    color: yellow;
+    border: 2px solid yellow;
+  }
+  body.alto-contraste #calculadora-wrapper button {
+    background: yellow;
+    color: black;
+    font-weight: bold;
+  }
+  body.alto-contraste #calculadora-wrapper button:hover {
+    background: orange;
+  }
+  body.alto-contraste footer a {
+    background-color: yellow;
+    color: black;
+  }
+  body.alto-contraste footer a:hover {
+    background-color: orange;
+  }
+
+  body.modo-sepia {
+    background-color: #f4ecd8;
+    color: #5b4636;
+  }
+  body.modo-sepia #pantalla {
+    background-color: #f4ecd8;
+    color: #5b4636;
+    border-color: #5b4636;
+  }
+  body.modo-sepia #calculadora-wrapper button {
+    background: #5b4636;
+    color: #f4ecd8;
+  }
+  body.modo-sepia #calculadora-wrapper button:hover {
+    background: #8b6b3c;
+  }
+  body.modo-sepia footer a {
+    background-color: #5b4636;
+    color: #f4ecd8;
+  }
+  body.modo-sepia footer a:hover {
+    background-color: #8b6b3c;
   }
 </style>
 </head>
 <body class="modo-claro">
 
-<h2 style="text-align: center; font-family: Arial, sans-serif;">Calculadora Accesible para personas con Discapacidad Visual</h2>
+<h2 style="text-align: center;">Calculadora Accesible para personas con Discapacidad Visual</h2>
 
 <div id="accesibilidad" aria-label="Opciones de accesibilidad">
   <button onclick="cambiarModo('modo-claro')" aria-pressed="true" aria-label="Modo claro">Claro</button>
@@ -131,10 +207,9 @@
   </div>
 </div>
 
-<footer style="text-align: center; margin-top: 30px; font-family: Arial, sans-serif;">
+<footer>
   <p>Esta herramienta es de libre uso. Cualquier apoyo al siguiente link:</p>
-  <a href="https://www.paypal.com/ncp/payment/K43R5RQY5GP8G" target="_blank"
-     style="background-color: #0070ba; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block;">
+  <a href="https://www.paypal.com/ncp/payment/K43R5RQY5GP8G" target="_blank" rel="noopener noreferrer">
     Apoyar vía PayPal
   </a>
   <p style="margin-top: 15px; font-size: 14px;">&copy; 2025 Luis Eduardo Monreal</p>
@@ -145,12 +220,10 @@
 
   function agregar(valor) {
     pantalla.value += valor;
-    actualizarAriaLive();
   }
 
   function limpiar() {
     pantalla.value = "";
-    actualizarAriaLive();
   }
 
   function calcular() {
@@ -159,7 +232,6 @@
     } catch {
       pantalla.value = "Error";
     }
-    actualizarAriaLive();
   }
 
   function funcion(tipo) {
@@ -191,11 +263,9 @@
           break;
         case 'pi':
           pantalla.value += Math.PI;
-          actualizarAriaLive();
           return;
         case 'e':
           pantalla.value += Math.E;
-          actualizarAriaLive();
           return;
         case 'factorial':
           resultado = factorial(valor);
@@ -212,7 +282,6 @@
     } catch {
       pantalla.value = "Error";
     }
-    actualizarAriaLive();
   }
 
   function factorial(n) {
@@ -221,7 +290,12 @@
     return n * factorial(n - 1);
   }
 
-  // Soporte para el teclado numerico y simbolos
+  // Cambiar modo accesibilidad para todo el sitio
+  function cambiarModo(modo) {
+    document.body.className = modo;
+  }
+
+  // Soporte teclado
   document.addEventListener("keydown", function(event) {
     const tecla = event.key;
 
@@ -231,22 +305,13 @@
       calcular();
     } else if (tecla === "Backspace") {
       pantalla.value = pantalla.value.slice(0, -1);
-      actualizarAriaLive();
     }
   });
-
-  // Función para cambiar modo accesible
-  function cambiarModo(modo) {
-    document.body.className = modo;
-  }
-
-  // Actualiza aria-live para leer la pantalla
-  function actualizarAriaLive() {
-    pantalla.setAttribute('aria-live', 'polite');
-  }
 </script>
+
 </body>
 </html>
+
 
 
 
