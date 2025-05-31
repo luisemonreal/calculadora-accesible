@@ -10,6 +10,7 @@
     margin: 0; padding: 0;
     background-color: #fff;
     color: #000;
+    font-size: 16px;
   }
   #calculadora-wrapper {
     max-width: 450px;
@@ -18,7 +19,7 @@
   #pantalla {
     width: 100%;
     height: 50px;
-    font-size: 22px;
+    font-size: 1.375rem; /* 22px */
     margin-bottom: 10px;
     text-align: right;
     padding: 10px;
@@ -29,7 +30,7 @@
   }
   #calculadora-wrapper button {
     padding: 10px;
-    font-size: 16px;
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     background: #444;
@@ -50,12 +51,13 @@
     text-align: center;
   }
   #accesibilidad button {
-    margin: 0 5px;
+    margin: 3px 5px;
     background: #0070ba;
     color: white;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9rem;
   }
   #accesibilidad button:hover {
     background: #005c8a;
@@ -144,6 +146,77 @@
   body.modo-sepia footer a:hover {
     background-color: #8b6b3c;
   }
+
+  /* Nuevos modos de contraste */
+
+  body.contraste-negro-blanco {
+    background-color: black;
+    color: white;
+  }
+  body.contraste-negro-blanco #pantalla {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+  }
+  body.contraste-negro-blanco #calculadora-wrapper button {
+    background: white;
+    color: black;
+  }
+  body.contraste-negro-blanco #calculadora-wrapper button:hover {
+    background: gray;
+    color: white;
+  }
+  body.contraste-negro-blanco footer a {
+    background-color: white;
+    color: black;
+  }
+  body.contraste-negro-blanco footer a:hover {
+    background-color: gray;
+    color: white;
+  }
+
+  body.contraste-amarillo-negro {
+    background-color: yellow;
+    color: black;
+  }
+  body.contraste-amarillo-negro #pantalla {
+    background-color: yellow;
+    color: black;
+    border: 2px solid black;
+  }
+  body.contraste-amarillo-negro #calculadora-wrapper button {
+    background: black;
+    color: yellow;
+  }
+  body.contraste-amarillo-negro #calculadora-wrapper button:hover {
+    background: darkgoldenrod;
+    color: white;
+  }
+  body.contraste-amarillo-negro footer a {
+    background-color: black;
+    color: yellow;
+  }
+  body.contraste-amarillo-negro footer a:hover {
+    background-color: darkgoldenrod;
+    color: white;
+  }
+
+  /* Tamaño de fuente variable */
+  body.aumentar-texto {
+    font-size: 20px;
+  }
+  body.aumentar-texto #pantalla {
+    font-size: 1.75rem;
+  }
+  body.aumentar-texto #calculadora-wrapper button {
+    font-size: 1.15rem;
+  }
+  #accesibilidad button.aumentar {
+    background: #28a745;
+  }
+  #accesibilidad button.aumentar:hover {
+    background: #1e7e34;
+  }
 </style>
 </head>
 <body class="modo-claro">
@@ -154,6 +227,9 @@
   <button onclick="cambiarModo('modo-claro')" aria-pressed="true" aria-label="Modo claro">Claro</button>
   <button onclick="cambiarModo('alto-contraste')" aria-label="Modo alto contraste">Alto Contraste</button>
   <button onclick="cambiarModo('modo-sepia')" aria-label="Modo sepia">Sepia</button>
+  <button onclick="cambiarModo('contraste-negro-blanco')" aria-label="Contraste negro y blanco">Negro/Blanco</button>
+  <button onclick="cambiarModo('contraste-amarillo-negro')" aria-label="Contraste amarillo y negro">Amarillo/Negro</button>
+  <button onclick="toggleTextoGrande()" aria-label="Aumentar tamaño de texto" class="aumentar">Aumentar Texto</button>
 </div>
 
 <div id="calculadora-wrapper">
@@ -163,7 +239,7 @@
     <!-- Fila 1 -->
     <button onclick="agregar('(')" aria-label="Parentesis de apertura">(</button>
     <button onclick="agregar(')')" aria-label="Parentesis de cierre">)</button>
-    <button onclick="funcion('pi')" aria-label="Numero pi">Pi</button>
+    <button onclick="funcion('pi')" aria-label="Número pi">Pi</button>
     <button onclick="funcion('e')" aria-label="Constante e">exponente</button>
     <button onclick="funcion('ln')" aria-label="Logaritmo natural">Log natural</button>
     <button onclick="funcion('log10')" aria-label="Logaritmo base diez">Log diez</button>
@@ -172,7 +248,7 @@
     <button onclick="funcion('sin')" aria-label="Seno">Seno</button>
     <button onclick="funcion('cos')" aria-label="Coseno">Coseno</button>
     <button onclick="funcion('tan')" aria-label="Tangente">Tangente</button>
-    <button onclick="funcion('sqrt')" aria-label="Raiz cuadrada">Raiz</button>
+    <button onclick="funcion('sqrt')" aria-label="Raíz cuadrada">Raíz</button>
     <button onclick="funcion('factorial')" aria-label="Factorial">Factorial</button>
     <button onclick="limpiar()" aria-label="Borrar todo">Borrar</button>
 
@@ -182,7 +258,7 @@
     <button onclick="agregar('9')" aria-label="Nueve">9</button>
     <button onclick="agregar('/')" aria-label="Dividir">Dividir</button>
     <button onclick="funcion('porcentaje')" aria-label="Porcentaje">Porcentaje</button>
-    <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">Mas Menos</button>
+    <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">Más/Menos</button>
 
     <!-- Fila 4 -->
     <button onclick="agregar('4')" aria-label="Cuatro">4</button>
@@ -202,7 +278,7 @@
 
     <!-- Fila 6 -->
     <button onclick="agregar('0')" aria-label="Cero">0</button>
-    <button onclick="agregar('+')" aria-label="Mas">Mas</button>
+    <button onclick="agregar('+')" aria-label="Más">Más</button>
     <button onclick="limpiar()" aria-label="Resetear calculadora">Resetear</button>
   </div>
 </div>
@@ -293,24 +369,23 @@
   // Cambiar modo accesibilidad para todo el sitio
   function cambiarModo(modo) {
     document.body.className = modo;
+    // Reset tamaño texto cuando cambia modo
+    if (document.body.classList.contains('aumentar-texto')) {
+      document.body.classList.remove('aumentar-texto');
+    }
+  }
+
+  // Toggle para aumentar tamaño de texto
+  function toggleTextoGrande() {
+    document.body.classList.toggle('aumentar-texto');
   }
 
   // Soporte teclado
   document.addEventListener("keydown", function(event) {
     const tecla = event.key;
 
-    if (!isNaN(tecla) || "+-*/.".includes(tecla)) {
-      agregar(tecla);
-    } else if (tecla === "Enter") {
-      calcular();
-    } else if (tecla === "Backspace") {
-      pantalla.value = pantalla.value.slice(0, -1);
-    }
-  });
-</script>
+    if (!isNaN(tecla) || "+-*/.".includes(tecla))*
 
-</body>
-</html>
 
 
 
