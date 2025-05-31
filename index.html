@@ -1,244 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Calculadora Accesible</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    background-color: #fff;
-    color: #000;
-    font-size: 16px;
-  }
-  #calculadora-wrapper {
-    max-width: 450px;
-    margin: 20px auto;
-  }
-  #pantalla {
-    width: 100%;
-    height: 50px;
-    font-size: 1.375rem; /* 22px */
-    margin-bottom: 10px;
-    text-align: right;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #f4f4f4;
-    color: #000;
-  }
-  #calculadora-wrapper button {
-    padding: 10px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background: #444;
-    color: white;
-    cursor: pointer;
-  }
-  #calculadora-wrapper button:hover {
-    background: #666;
-  }
-  #botones {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-  }
-  #accesibilidad {
-    max-width: 450px;
-    margin: 0 auto 15px auto;
-    text-align: center;
-  }
-  #accesibilidad button {
-    margin: 3px 5px;
-    background: #0070ba;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-  #accesibilidad button:hover {
-    background: #005c8a;
-  }
-  footer {
-    text-align: center;
-    margin-top: 30px;
-    font-family: Arial, sans-serif;
-  }
-  footer a {
-    background-color: #0070ba;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-  }
-  footer a:hover {
-    background-color: #005c8a;
-  }
+<div id="calculadora-wrapper" style="max-width: 450px; margin: 20px auto; font-family: Arial, sans-serif;">
 
-  /* Modos accesibles para todo el body */
+  <h2 style="text-align: center;">Calculadora Accesible para personas con Discapacidad Visual</h2>
 
-  body.modo-claro {
-    background-color: #fff;
-    color: #000;
-  }
-  body.modo-claro #pantalla {
-    background-color: #f4f4f4;
-    color: #000;
-    border-color: #ccc;
-  }
-  body.modo-claro #calculadora-wrapper button {
-    background: #444;
-    color: white;
-  }
-  body.modo-claro #calculadora-wrapper button:hover {
-    background: #666;
-  }
+  <input type="text" id="pantalla" readonly
+    style="width: 100%; height: 50px; font-size: 22px; margin-bottom: 10px; text-align: right; padding: 10px; border-radius: 5px; border: 1px solid #ccc; background-color:#f4f4f4;"
+    aria-label="Pantalla de resultados">
 
-  body.alto-contraste {
-    background-color: black;
-    color: yellow;
-  }
-  body.alto-contraste #pantalla {
-    background-color: black;
-    color: yellow;
-    border: 2px solid yellow;
-  }
-  body.alto-contraste #calculadora-wrapper button {
-    background: yellow;
-    color: black;
-    font-weight: bold;
-  }
-  body.alto-contraste #calculadora-wrapper button:hover {
-    background: orange;
-  }
-  body.alto-contraste footer a {
-    background-color: yellow;
-    color: black;
-  }
-  body.alto-contraste footer a:hover {
-    background-color: orange;
-  }
+  <div id="botones" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-bottom: 20px;">
 
-  body.modo-sepia {
-    background-color: #f4ecd8;
-    color: #5b4636;
-  }
-  body.modo-sepia #pantalla {
-    background-color: #f4ecd8;
-    color: #5b4636;
-    border-color: #5b4636;
-  }
-  body.modo-sepia #calculadora-wrapper button {
-    background: #5b4636;
-    color: #f4ecd8;
-  }
-  body.modo-sepia #calculadora-wrapper button:hover {
-    background: #8b6b3c;
-  }
-  body.modo-sepia footer a {
-    background-color: #5b4636;
-    color: #f4ecd8;
-  }
-  body.modo-sepia footer a:hover {
-    background-color: #8b6b3c;
-  }
-
-  /* Nuevos modos de contraste */
-
-  body.contraste-negro-blanco {
-    background-color: black;
-    color: white;
-  }
-  body.contraste-negro-blanco #pantalla {
-    background-color: black;
-    color: white;
-    border: 2px solid white;
-  }
-  body.contraste-negro-blanco #calculadora-wrapper button {
-    background: white;
-    color: black;
-  }
-  body.contraste-negro-blanco #calculadora-wrapper button:hover {
-    background: gray;
-    color: white;
-  }
-  body.contraste-negro-blanco footer a {
-    background-color: white;
-    color: black;
-  }
-  body.contraste-negro-blanco footer a:hover {
-    background-color: gray;
-    color: white;
-  }
-
-  body.contraste-amarillo-negro {
-    background-color: yellow;
-    color: black;
-  }
-  body.contraste-amarillo-negro #pantalla {
-    background-color: yellow;
-    color: black;
-    border: 2px solid black;
-  }
-  body.contraste-amarillo-negro #calculadora-wrapper button {
-    background: black;
-    color: yellow;
-  }
-  body.contraste-amarillo-negro #calculadora-wrapper button:hover {
-    background: darkgoldenrod;
-    color: white;
-  }
-  body.contraste-amarillo-negro footer a {
-    background-color: black;
-    color: yellow;
-  }
-  body.contraste-amarillo-negro footer a:hover {
-    background-color: darkgoldenrod;
-    color: white;
-  }
-
-  /* Tamaño de fuente variable */
-  body.aumentar-texto {
-    font-size: 20px;
-  }
-  body.aumentar-texto #pantalla {
-    font-size: 1.75rem;
-  }
-  body.aumentar-texto #calculadora-wrapper button {
-    font-size: 1.15rem;
-  }
-  #accesibilidad button.aumentar {
-    background: #28a745;
-  }
-  #accesibilidad button.aumentar:hover {
-    background: #1e7e34;
-  }
-</style>
-</head>
-<body class="modo-claro">
-
-<h2 style="text-align: center;">Calculadora Accesible para personas con Discapacidad Visual</h2>
-
-<div id="accesibilidad" aria-label="Opciones de accesibilidad">
-  <button onclick="cambiarModo('modo-claro')" aria-pressed="true" aria-label="Modo claro">Claro</button>
-  <button onclick="cambiarModo('alto-contraste')" aria-label="Modo alto contraste">Alto Contraste</button>
-  <button onclick="cambiarModo('modo-sepia')" aria-label="Modo sepia">Sepia</button>
-  <button onclick="cambiarModo('contraste-negro-blanco')" aria-label="Contraste negro y blanco">Negro/Blanco</button>
-  <button onclick="cambiarModo('contraste-amarillo-negro')" aria-label="Contraste amarillo y negro">Amarillo/Negro</button>
-  <button onclick="toggleTextoGrande()" aria-label="Aumentar tamaño de texto" class="aumentar">Aumentar Texto</button>
-</div>
-
-<div id="calculadora-wrapper">
-  <input type="text" id="pantalla" disabled aria-label="Pantalla de resultados" />
-
-  <div id="botones">
     <!-- Fila 1 -->
-    <button onclick="agregar('(')" aria-label="Parentesis de apertura">(</button>
-    <button onclick="agregar(')')" aria-label="Parentesis de cierre">)</button>
+    <button onclick="agregar('(')" aria-label="Paréntesis de apertura">(</button>
+    <button onclick="agregar(')')" aria-label="Paréntesis de cierre">)</button>
     <button onclick="funcion('pi')" aria-label="Número pi">Pi</button>
     <button onclick="funcion('e')" aria-label="Constante e">exponente</button>
     <button onclick="funcion('ln')" aria-label="Logaritmo natural">Log natural</button>
@@ -258,7 +30,7 @@
     <button onclick="agregar('9')" aria-label="Nueve">9</button>
     <button onclick="agregar('/')" aria-label="Dividir">Dividir</button>
     <button onclick="funcion('porcentaje')" aria-label="Porcentaje">Porcentaje</button>
-    <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">Más/Menos</button>
+    <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">Mas Menos</button>
 
     <!-- Fila 4 -->
     <button onclick="agregar('4')" aria-label="Cuatro">4</button>
@@ -272,47 +44,156 @@
     <button onclick="agregar('1')" aria-label="Uno">1</button>
     <button onclick="agregar('2')" aria-label="Dos">2</button>
     <button onclick="agregar('3')" aria-label="Tres">3</button>
-    <button onclick="agregar('-')" aria-label="Menos">Menos</button>
-    <button onclick="agregar('.')" aria-label="Punto decimal">Punto</button>
-    <button onclick="calcular()" aria-label="Igual">=</button>
-
-    <!-- Fila 6 -->
+    <button onclick="agregar('-')" aria-label="Restar">Menos</button>
     <button onclick="agregar('0')" aria-label="Cero">0</button>
-    <button onclick="agregar('+')" aria-label="Más">Más</button>
-    <button onclick="limpiar()" aria-label="Resetear calculadora">Resetear</button>
+    <button onclick="agregar('.')" aria-label="Punto decimal">.</button>
+    <button onclick="agregar('+')" aria-label="Sumar">+</button>
+    <button onclick="calcular()" aria-label="Calcular resultado">=</button>
+
   </div>
+
+  <div id="accesibilidad" style="text-align: center; margin-bottom: 20px;">
+    <p><strong>Modos de accesibilidad:</strong></p>
+    <button onclick="cambiarModo('modo-claro')" aria-pressed="true" aria-label="Modo claro">Claro</button>
+    <button onclick="cambiarModo('alto-contraste')" aria-pressed="false" aria-label="Alto contraste">Alto contraste</button>
+    <button onclick="cambiarModo('modo-sepia')" aria-pressed="false" aria-label="Modo sepia">Sepia</button>
+    <button onclick="cambiarModo('contraste-negro-blanco')" aria-pressed="false" aria-label="Contraste negro y blanco">Negro/Blanco</button>
+    <button onclick="cambiarModo('contraste-amarillo-negro')" aria-pressed="false" aria-label="Contraste amarillo y negro">Amarillo/Negro</button>
+    <button class="aumentar" onclick="toggleTextoGrande()" aria-pressed="false" aria-label="Aumentar tamaño de texto">Aumentar texto</button>
+  </div>
+
 </div>
 
-<footer>
-  <p>Esta herramienta es de libre uso. Cualquier apoyo al siguiente link:</p>
-  <a href="https://www.paypal.com/ncp/payment/K43R5RQY5GP8G" target="_blank" rel="noopener noreferrer">
-    Apoyar vía PayPal
-  </a>
-  <p style="margin-top: 15px; font-size: 14px;">&copy; 2025 Luis Eduardo Monreal</p>
+<footer style="text-align: center; margin-top: 40px; font-family: Arial, sans-serif; font-size: 14px; color: #555;">
+  <p>Esta herramienta es de libre uso, cualquier apoyo al siguiente link:</p>
+  <a href="https://www.paypal.com/ncp/payment/K43R5RQY5GP8G" target="_blank" rel="noopener noreferrer" aria-label="Donar vía PayPal" style="font-weight: bold; color: #0070ba;">Donar vía PayPal</a><br />
+  <small>Creado por Luis Eduardo Monreal</small>
 </footer>
 
+<style>
+  /* Botones de calculadora */
+  #calculadora-wrapper button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #calculadora-wrapper button:hover {
+    background: #666;
+  }
+
+  /* Botones accesibilidad */
+  #accesibilidad button {
+    margin: 4px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #666;
+    background: #eee;
+    color: #333;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  #accesibilidad button[aria-pressed="true"] {
+    background: #333;
+    color: #fff;
+  }
+  #accesibilidad button.aumentar {
+    background: #0070ba;
+    color: white;
+    border-color: #005a8f;
+  }
+  #accesibilidad button.aumentar[aria-pressed="true"] {
+    background: #005a8f;
+  }
+
+  /* Modos de accesibilidad */
+
+  /* Claro (default) */
+  body.modo-claro {
+    background-color: #fff;
+    color: #000;
+  }
+
+  /* Alto contraste */
+  body.alto-contraste {
+    background-color: black;
+    color: yellow;
+  }
+
+  /* Sepia */
+  body.modo-sepia {
+    background-color: #f4ecd8;
+    color: #5b4636;
+  }
+
+  /* Contraste negro/blanco */
+  body.contraste-negro-blanco {
+    background-color: black;
+    color: white;
+  }
+
+  /* Contraste amarillo/negro */
+  body.contraste-amarillo-negro {
+    background-color: yellow;
+    color: black;
+  }
+
+  /* Texto grande */
+  body.aumentar-texto {
+    font-size: 130% !important;
+  }
+
+</style>
+
 <script>
-  const pantalla = document.getElementById("pantalla");
+  // Accesibilidad: manejar modos y texto grande
+  const botonesModo = document.querySelectorAll('#accesibilidad button:not(.aumentar)');
+
+  function cambiarModo(modo) {
+    const modos = ['modo-claro', 'alto-contraste', 'modo-sepia', 'contraste-negro-blanco', 'contraste-amarillo-negro'];
+    modos.forEach(m => document.body.classList.remove(m));
+    document.body.classList.add(modo);
+
+    botonesModo.forEach(boton => {
+      const textoBoton = boton.textContent.toLowerCase().replace(/\s+/g, '').replace(/-/g, '');
+      const modoLimpio = modo.toLowerCase().replace(/-/g, '');
+      boton.setAttribute('aria-pressed', textoBoton.includes(modoLimpio) ? 'true' : 'false');
+    });
+  }
+
+  function toggleTextoGrande() {
+    document.body.classList.toggle('aumentar-texto');
+    const btn = document.querySelector('#accesibilidad button.aumentar');
+    const isPressed = btn.getAttribute('aria-pressed') === 'true';
+    btn.setAttribute('aria-pressed', isPressed ? 'false' : 'true');
+  }
+
+  // Calculadora
+  const pantalla = document.getElementById('pantalla');
 
   function agregar(valor) {
     pantalla.value += valor;
   }
 
   function limpiar() {
-    pantalla.value = "";
+    pantalla.value = '';
   }
 
-  function calcular() {
-    try {
-      pantalla.value = eval(pantalla.value);
-    } catch {
-      pantalla.value = "Error";
-    }
+  function factorial(n) {
+    n = Math.floor(n);
+    if (n < 0) return NaN;
+    if (n === 0 || n === 1) return 1;
+    let res = 1;
+    for (let i = 2; i <= n; i++) res *= i;
+    return res;
   }
 
   function funcion(tipo) {
     try {
-      let valor = eval(pantalla.value || 0);
+      let valor = eval(pantalla.value || '0');
       let resultado;
 
       switch (tipo) {
@@ -320,7 +201,7 @@
           resultado = Math.sqrt(valor);
           break;
         case 'log10':
-          resultado = Math.log10(valor);
+          resultado = Math.log10 ? Math.log10(valor) : Math.log(valor) / Math.LN10;
           break;
         case 'ln':
           resultado = Math.log(valor);
@@ -338,10 +219,10 @@
           resultado = Math.tan(valor * Math.PI / 180);
           break;
         case 'pi':
-          pantalla.value += Math.PI;
+          pantalla.value += Math.PI.toFixed(6);
           return;
         case 'e':
-          pantalla.value += Math.E;
+          pantalla.value += Math.E.toFixed(6);
           return;
         case 'factorial':
           resultado = factorial(valor);
@@ -353,38 +234,52 @@
           resultado = -valor;
           break;
       }
-
       pantalla.value = resultado;
     } catch {
-      pantalla.value = "Error";
+      pantalla.value = 'Error';
     }
   }
 
-  function factorial(n) {
-    if (n < 0) return NaN;
-    if (n === 0 || n === 1) return 1;
-    return n * factorial(n - 1);
-  }
+  function calcular() {
+    try {
+      // Reemplazos para funciones y constantes
+      let expr = pantalla.value;
+      expr = expr.replace(/pi/g, Math.PI);
+      expr = expr.replace(/e/g, Math.E);
+      expr = expr.replace(/sqrt/g, 'Math.sqrt');
+      expr = expr.replace(/sin/g, 'Math.sin');
+      expr = expr.replace(/cos/g, 'Math.cos');
+      expr = expr.replace(/tan/g, 'Math.tan');
+      expr = expr.replace(/log10/g, 'Math.log10 || (x => Math.log(x)/Math.LN10)');
+      expr = expr.replace(/ln/g, 'Math.log');
+      expr = expr.replace(/exp/g, 'Math.exp');
 
-  // Cambiar modo accesibilidad para todo el sitio
-  function cambiarModo(modo) {
-    document.body.className = modo;
-    // Reset tamaño texto cuando cambia modo
-    if (document.body.classList.contains('aumentar-texto')) {
-      document.body.classList.remove('aumentar-texto');
+      // Evaluar expresión con seguridad básica
+      let resultado = Function('"use strict";return (' + expr + ')')();
+      pantalla.value = resultado;
+    } catch {
+      pantalla.value = 'Error';
     }
   }
 
-  // Toggle para aumentar tamaño de texto
-  function toggleTextoGrande() {
-    document.body.classList.toggle('aumentar-texto');
-  }
-
-  // Soporte teclado
-  document.addEventListener("keydown", function(event) {
+  // Opcional: soporte teclado para calculadora (agregar sólo números y operadores)
+  document.addEventListener('keydown', function(event) {
     const tecla = event.key;
+    const validKeys = '0123456789+-*/().';
 
-    if (!isNaN(tecla) || "+-*/.".includes(tecla))*
+    if (validKeys.includes(tecla)) {
+      agregar(tecla);
+    } else if (tecla === 'Enter') {
+      calcular();
+    } else if (tecla === 'Backspace') {
+      pantalla.value = pantalla.value.slice(0, -1);
+    }
+  });
+
+  // Iniciamos modo claro por defecto
+  cambiarModo('modo-claro');
+</script>
+
 
 
 
