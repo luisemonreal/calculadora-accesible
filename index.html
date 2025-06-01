@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora Accesible</title>
   <style>
-    /* Estilos base */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -87,7 +86,6 @@
       background: #005a8f;
     }
 
-    /* Modos de accesibilidad */
     body.modo-claro {
       background-color: #fff;
       color: #000;
@@ -117,24 +115,6 @@
       font-size: 130% !important;
     }
 
-    /* Tabla de accesos rápidos */
-    #tabla-accesos {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    #tabla-accesos th, #tabla-accesos td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    #tabla-accesos th {
-      background-color: #f0f0f0;
-    }
-
-    /* Responsive */
     @media (max-width: 600px) {
       #botones {
         grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
@@ -149,63 +129,48 @@
     <input type="text" id="pantalla" readonly aria-label="Pantalla de resultados" />
 
     <div id="botones">
-      <!-- Fila 1 -->
+      <!-- Funciones científicas -->
       <button onclick="agregar('(')" aria-label="Paréntesis de apertura">(</button>
       <button onclick="agregar(')')" aria-label="Paréntesis de cierre">)</button>
       <button onclick="funcion('pi')" aria-label="Número pi">π</button>
       <button onclick="funcion('e')" aria-label="Constante e">e</button>
       <button onclick="funcion('ln')" aria-label="Logaritmo natural">ln</button>
       <button onclick="funcion('log10')" aria-label="Logaritmo base diez">log</button>
-
-      <!-- Fila 2 -->
       <button onclick="funcion('sin')" aria-label="Seno">sin</button>
       <button onclick="funcion('cos')" aria-label="Coseno">cos</button>
       <button onclick="funcion('tan')" aria-label="Tangente">tan</button>
-      <button onclick="funcion('asin')" aria-label="Arco seno">asin</button>
-      <button onclick="funcion('acos')" aria-label="Arco coseno">acos</button>
-      <button onclick="funcion('atan')" aria-label="Arco tangente">atan</button>
-
-      <!-- Fila 3 -->
-      <button onclick="funcion('sinh')" aria-label="Seno hiperbólico">sinh</button>
-      <button onclick="funcion('cosh')" aria-label="Coseno hiperbólico">cosh</button>
-      <button onclick="funcion('tanh')" aria-label="Tangente hiperbólica">tanh</button>
-      <button onclick="funcion('asinh')" aria-label="Arco seno hiperbólico">asinh</button>
-      <button onclick="funcion('acosh')" aria-label="Arco coseno hiperbólico">acosh</button>
-      <button onclick="funcion('atanh')" aria-label="Arco tangente hiperbólica">atanh</button>
-
-      <!-- Fila 4 -->
       <button onclick="funcion('sqrt')" aria-label="Raíz cuadrada">√</button>
       <button onclick="funcion('cbrt')" aria-label="Raíz cúbica">∛</button>
-      <button onclick="funcion('exp')" aria-label="Exponencial">exp</button>
-      <button onclick="funcion('log2')" aria-label="Logaritmo base dos">log₂</button>
       <button onclick="funcion('abs')" aria-label="Valor absoluto">abs</button>
+      <button onclick="funcion('exp')" aria-label="Exponencial">exp</button>
       <button onclick="funcion('factorial')" aria-label="Factorial">n!</button>
 
-      <!-- Fila 5 -->
+      <!-- Números agrupados y básicos -->
       <button onclick="agregar('7')" aria-label="Siete">7</button>
       <button onclick="agregar('8')" aria-label="Ocho">8</button>
       <button onclick="agregar('9')" aria-label="Nueve">9</button>
       <button onclick="agregar('/')" aria-label="Dividir">÷</button>
-      <button onclick="funcion('porcentaje')" aria-label="Porcentaje">%</button>
-      <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">±</button>
 
-      <!-- Fila 6 -->
       <button onclick="agregar('4')" aria-label="Cuatro">4</button>
       <button onclick="agregar('5')" aria-label="Cinco">5</button>
       <button onclick="agregar('6')" aria-label="Seis">6</button>
       <button onclick="agregar('*')" aria-label="Multiplicar">×</button>
-      <button onclick="agregar('**')" aria-label="Potencia">^</button>
-      <button onclick="limpiar()" aria-label="Borrar todo">C</button>
 
-      <!-- Fila 7 -->
       <button onclick="agregar('1')" aria-label="Uno">1</button>
       <button onclick="agregar('2')" aria-label="Dos">2</button>
       <button onclick="agregar('3')" aria-label="Tres">3</button>
       <button onclick="agregar('-')" aria-label="Restar">−</button>
+
       <button onclick="agregar('0')" aria-label="Cero">0</button>
       <button onclick="agregar('.')" aria-label="Punto decimal">.</button>
       <button onclick="agregar('+')" aria-label="Sumar">+</button>
       <button onclick="calcular()" aria-label="Calcular resultado">=</button>
+
+      <!-- Extra -->
+      <button onclick="agregar('**')" aria-label="Potencia">^</button>
+      <button onclick="funcion('porcentaje')" aria-label="Porcentaje">%</button>
+      <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">±</button>
+      <button onclick="limpiar()" aria-label="Borrar todo">C</button>
     </div>
 
     <div id="accesibilidad">
@@ -218,20 +183,76 @@
       <button class="aumentar" onclick="toggleTextoGrande()" aria-pressed="false" aria-label="Aumentar tamaño de texto">Aumentar texto</button>
     </div>
 
-    <table id="tabla-accesos">
-      <thead>
-        <tr>
-          <th>Función</th>
-          <th>Tecla(s)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Seno</td><td>S</td></tr>
-        <tr><td>Coseno</td><td>C</td></tr>
-        <tr><td>Tangente</td><td>T</td></tr>
-        <tr><td>Arco Seno</td><td>Shift + S</td></tr>
-        <tr
-::contentReference[oaicite:5]{index=5}
+    <p style="text-align:center; font-style:italic; margin-top:30px;">
+      Luis Eduardo Monreal<br>
+      <small>La verdadera inclusión no es invitar a todos, sino asegurarse de que todos puedan quedarse.</small>
+    </p>
+  </div>
+
+  <script>
+    function agregar(valor) {
+      document.getElementById('pantalla').value += valor;
+    }
+
+    function limpiar() {
+      document.getElementById('pantalla').value = '';
+    }
+
+    function calcular() {
+      try {
+        document.getElementById('pantalla').value = eval(document.getElementById('pantalla').value);
+      } catch (e) {
+        document.getElementById('pantalla').value = 'Error';
+      }
+    }
+
+    function funcion(tipo) {
+      let val = document.getElementById('pantalla').value;
+      let resultado;
+      const x = parseFloat(val);
+
+      switch(tipo) {
+        case 'pi': resultado = Math.PI; break;
+        case 'e': resultado = Math.E; break;
+        case 'ln': resultado = Math.log(x); break;
+        case 'log10': resultado = Math.log10(x); break;
+        case 'log2': resultado = Math.log2(x); break;
+        case 'sin': resultado = Math.sin(x); break;
+        case 'cos': resultado = Math.cos(x); break;
+        case 'tan': resultado = Math.tan(x); break;
+        case 'sqrt': resultado = Math.sqrt(x); break;
+        case 'cbrt': resultado = Math.cbrt(x); break;
+        case 'abs': resultado = Math.abs(x); break;
+        case 'exp': resultado = Math.exp(x); break;
+        case 'factorial':
+          resultado = 1;
+          for(let i=1; i<=x; i++) resultado *= i;
+          break;
+        case 'porcentaje': resultado = x / 100; break;
+        case 'cambioSigno': resultado = -x; break;
+        default: resultado = 'Error';
+      }
+
+      document.getElementById('pantalla').value = resultado;
+    }
+
+    function cambiarModo(modo) {
+      document.body.className = modo;
+      const botones = document.querySelectorAll('#accesibilidad button');
+      botones.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      document.querySelector(`button[onclick*="${modo}"]`).setAttribute('aria-pressed', 'true');
+    }
+
+    function toggleTextoGrande() {
+      const body = document.body;
+      const btn = document.querySelector('.aumentar');
+      const activado = body.classList.toggle('aumentar-texto');
+      btn.setAttribute('aria-pressed', activado ? 'true' : 'false');
+    }
+  </script>
+</body>
+</html>
+
  
 
 
