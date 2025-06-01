@@ -5,17 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora Accesible</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
-      background-color: #fff;
-      color: #000;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     #calculadora-wrapper {
-      max-width: 600px;
-      margin: 0 auto;
+      max-width: 100%;
+      width: 95%;
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 10px;
     }
 
     h2 {
@@ -41,9 +47,9 @@
       margin-bottom: 20px;
     }
 
-    #botones button {
+    #calculadora-wrapper button {
       padding: 10px;
-      font-size: 14px;
+      font-size: 16px;
       border: none;
       border-radius: 5px;
       background: #444;
@@ -51,7 +57,7 @@
       cursor: pointer;
     }
 
-    #botones button:hover {
+    #calculadora-wrapper button:hover {
       background: #666;
     }
 
@@ -86,6 +92,7 @@
       background: #005a8f;
     }
 
+    /* Modos de accesibilidad */
     body.modo-claro {
       background-color: #fff;
       color: #000;
@@ -115,62 +122,79 @@
       font-size: 130% !important;
     }
 
-    @media (max-width: 600px) {
-      #botones {
-        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #555;
+      padding: 10px;
+    }
+
+    footer a {
+      font-weight: bold;
+      color: #0070ba;
+      text-decoration: none;
+    }
+
+    footer em {
+      display: block;
+      margin-top: 5px;
+      color: #333;
+      font-style: italic;
+    }
+
+    @media (max-width: 400px) {
+      #calculadora-wrapper button {
+        font-size: 14px;
+        padding: 8px;
       }
     }
   </style>
 </head>
 <body class="modo-claro">
+
   <div id="calculadora-wrapper">
     <h2>Calculadora Accesible para personas con Discapacidad Visual</h2>
 
-    <input type="text" id="pantalla" readonly aria-label="Pantalla de resultados" />
+    <input type="text" id="pantalla" readonly aria-label="Pantalla de resultados">
 
     <div id="botones">
-      <!-- Funciones científicas -->
       <button onclick="agregar('(')" aria-label="Paréntesis de apertura">(</button>
       <button onclick="agregar(')')" aria-label="Paréntesis de cierre">)</button>
-      <button onclick="funcion('pi')" aria-label="Número pi">π</button>
-      <button onclick="funcion('e')" aria-label="Constante e">e</button>
-      <button onclick="funcion('ln')" aria-label="Logaritmo natural">ln</button>
-      <button onclick="funcion('log10')" aria-label="Logaritmo base diez">log</button>
-      <button onclick="funcion('sin')" aria-label="Seno">sin</button>
-      <button onclick="funcion('cos')" aria-label="Coseno">cos</button>
-      <button onclick="funcion('tan')" aria-label="Tangente">tan</button>
-      <button onclick="funcion('sqrt')" aria-label="Raíz cuadrada">√</button>
-      <button onclick="funcion('cbrt')" aria-label="Raíz cúbica">∛</button>
-      <button onclick="funcion('abs')" aria-label="Valor absoluto">abs</button>
-      <button onclick="funcion('exp')" aria-label="Exponencial">exp</button>
-      <button onclick="funcion('factorial')" aria-label="Factorial">n!</button>
+      <button onclick="funcion('pi')" aria-label="Número pi">Pi</button>
+      <button onclick="funcion('e')" aria-label="Constante e">exponente</button>
+      <button onclick="funcion('ln')" aria-label="Logaritmo natural">Log natural</button>
+      <button onclick="funcion('log10')" aria-label="Logaritmo base diez">Log diez</button>
 
-      <!-- Números agrupados y básicos -->
+      <button onclick="funcion('sin')" aria-label="Seno">Seno</button>
+      <button onclick="funcion('cos')" aria-label="Coseno">Coseno</button>
+      <button onclick="funcion('tan')" aria-label="Tangente">Tangente</button>
+      <button onclick="funcion('sqrt')" aria-label="Raíz cuadrada">Raíz</button>
+      <button onclick="funcion('factorial')" aria-label="Factorial">Factorial</button>
+      <button onclick="limpiar()" aria-label="Borrar todo">Borrar</button>
+
       <button onclick="agregar('7')" aria-label="Siete">7</button>
       <button onclick="agregar('8')" aria-label="Ocho">8</button>
       <button onclick="agregar('9')" aria-label="Nueve">9</button>
-      <button onclick="agregar('/')" aria-label="Dividir">÷</button>
+      <button onclick="agregar('/')" aria-label="Dividir">Dividir</button>
+      <button onclick="funcion('porcentaje')" aria-label="Porcentaje">Porcentaje</button>
+      <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">Mas Menos</button>
 
       <button onclick="agregar('4')" aria-label="Cuatro">4</button>
       <button onclick="agregar('5')" aria-label="Cinco">5</button>
       <button onclick="agregar('6')" aria-label="Seis">6</button>
-      <button onclick="agregar('*')" aria-label="Multiplicar">×</button>
+      <button onclick="agregar('*')" aria-label="Multiplicar">Multiplicar</button>
+      <button onclick="agregar('**')" aria-label="Potencia">Potencia</button>
+      <button onclick="funcion('exp')" aria-label="Exponencial">Exponencial</button>
 
       <button onclick="agregar('1')" aria-label="Uno">1</button>
       <button onclick="agregar('2')" aria-label="Dos">2</button>
       <button onclick="agregar('3')" aria-label="Tres">3</button>
-      <button onclick="agregar('-')" aria-label="Restar">−</button>
-
+      <button onclick="agregar('-')" aria-label="Restar">Menos</button>
       <button onclick="agregar('0')" aria-label="Cero">0</button>
       <button onclick="agregar('.')" aria-label="Punto decimal">.</button>
       <button onclick="agregar('+')" aria-label="Sumar">+</button>
       <button onclick="calcular()" aria-label="Calcular resultado">=</button>
-
-      <!-- Extra -->
-      <button onclick="agregar('**')" aria-label="Potencia">^</button>
-      <button onclick="funcion('porcentaje')" aria-label="Porcentaje">%</button>
-      <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">±</button>
-      <button onclick="limpiar()" aria-label="Borrar todo">C</button>
     </div>
 
     <div id="accesibilidad">
@@ -182,73 +206,115 @@
       <button onclick="cambiarModo('contraste-amarillo-negro')" aria-pressed="false" aria-label="Contraste amarillo y negro">Amarillo/Negro</button>
       <button class="aumentar" onclick="toggleTextoGrande()" aria-pressed="false" aria-label="Aumentar tamaño de texto">Aumentar texto</button>
     </div>
-
-    <p style="text-align:center; font-style:italic; margin-top:30px;">
-      Luis Eduardo Monreal<br>
-      <small>La verdadera inclusión no es invitar a todos, sino asegurarse de que todos puedan quedarse.</small>
-    </p>
   </div>
 
+  <footer>
+    <p>Esta herramienta es de libre uso, cualquier apoyo al siguiente link:</p>
+    <a href="https://www.paypal.com/ncp/payment/K43R5RQY5GP8G" target="_blank" rel="noopener noreferrer" aria-label="Donar vía PayPal">Donar vía PayPal</a><br />
+    <small>Creado por Luis Eduardo Monreal</small>
+    <em>La verdadera inclusión no es invitar a todos, sino asegurarse de que todos puedan quedarse</em>
+  </footer>
+
   <script>
+    const botonesModo = document.querySelectorAll('#accesibilidad button:not(.aumentar)');
+
+    function cambiarModo(modo) {
+      const modos = ['modo-claro', 'alto-contraste', 'modo-sepia', 'contraste-negro-blanco', 'contraste-amarillo-negro'];
+      modos.forEach(m => document.body.classList.remove(m));
+      document.body.classList.add(modo);
+
+      botonesModo.forEach(boton => {
+        const textoBoton = boton.textContent.toLowerCase().replace(/\s+/g, '').replace(/-/g, '');
+        const modoLimpio = modo.toLowerCase().replace(/-/g, '');
+        boton.setAttribute('aria-pressed', textoBoton.includes(modoLimpio) ? 'true' : 'false');
+      });
+    }
+
+    function toggleTextoGrande() {
+      document.body.classList.toggle('aumentar-texto');
+      const btn = document.querySelector('#accesibilidad button.aumentar');
+      const isPressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', isPressed ? 'false' : 'true');
+    }
+
+    const pantalla = document.getElementById('pantalla');
+
     function agregar(valor) {
-      document.getElementById('pantalla').value += valor;
+      pantalla.value += valor;
     }
 
     function limpiar() {
-      document.getElementById('pantalla').value = '';
+      pantalla.value = '';
+    }
+
+    function factorial(n) {
+      n = Math.floor(n);
+      if (n < 0) return NaN;
+      if (n === 0 || n === 1) return 1;
+      let res = 1;
+      for (let i = 2; i <= n; i++) res *= i;
+      return res;
+    }
+
+    function funcion(tipo) {
+      try {
+        let valor = eval(pantalla.value || '0');
+        let resultado;
+
+        switch (tipo) {
+          case 'sqrt': resultado = Math.sqrt(valor); break;
+          case 'log10': resultado = Math.log10 ? Math.log10(valor) : Math.log(valor) / Math.LN10; break;
+          case 'ln': resultado = Math.log(valor); break;
+          case 'exp': resultado = Math.exp(valor); break;
+          case 'sin': resultado = Math.sin(valor * Math.PI / 180); break;
+          case 'cos': resultado = Math.cos(valor * Math.PI / 180); break;
+          case 'tan': resultado = Math.tan(valor * Math.PI / 180); break;
+          case 'pi': pantalla.value += Math.PI.toFixed(6); return;
+          case 'e': pantalla.value += Math.E.toFixed(6); return;
+          case 'factorial': resultado = factorial(valor); break;
+          case 'porcentaje': resultado = valor / 100; break;
+          case 'cambioSigno': resultado = -valor; break;
+        }
+        pantalla.value = resultado;
+      } catch {
+        pantalla.value = 'Error';
+      }
     }
 
     function calcular() {
       try {
-        document.getElementById('pantalla').value = eval(document.getElementById('pantalla').value);
-      } catch (e) {
-        document.getElementById('pantalla').value = 'Error';
+        let expr = pantalla.value;
+        expr = expr.replace(/pi/g, Math.PI);
+        expr = expr.replace(/e/g, Math.E);
+        expr = expr.replace(/sqrt/g, 'Math.sqrt');
+        expr = expr.replace(/sin/g, 'Math.sin');
+        expr = expr.replace(/cos/g, 'Math.cos');
+        expr = expr.replace(/tan/g, 'Math.tan');
+        expr = expr.replace(/log10/g, 'Math.log10 || (x => Math.log(x)/Math.LN10)');
+        expr = expr.replace(/ln/g, 'Math.log');
+        expr = expr.replace(/exp/g, 'Math.exp');
+
+        let resultado = Function('"use strict";return (' + expr + ')')();
+        pantalla.value = resultado;
+      } catch {
+        pantalla.value = 'Error';
       }
     }
 
-    function funcion(tipo) {
-      let val = document.getElementById('pantalla').value;
-      let resultado;
-      const x = parseFloat(val);
+    document.addEventListener('keydown', function(event) {
+      const tecla = event.key;
+      const validKeys = '0123456789+-*/().';
 
-      switch(tipo) {
-        case 'pi': resultado = Math.PI; break;
-        case 'e': resultado = Math.E; break;
-        case 'ln': resultado = Math.log(x); break;
-        case 'log10': resultado = Math.log10(x); break;
-        case 'log2': resultado = Math.log2(x); break;
-        case 'sin': resultado = Math.sin(x); break;
-        case 'cos': resultado = Math.cos(x); break;
-        case 'tan': resultado = Math.tan(x); break;
-        case 'sqrt': resultado = Math.sqrt(x); break;
-        case 'cbrt': resultado = Math.cbrt(x); break;
-        case 'abs': resultado = Math.abs(x); break;
-        case 'exp': resultado = Math.exp(x); break;
-        case 'factorial':
-          resultado = 1;
-          for(let i=1; i<=x; i++) resultado *= i;
-          break;
-        case 'porcentaje': resultado = x / 100; break;
-        case 'cambioSigno': resultado = -x; break;
-        default: resultado = 'Error';
+      if (validKeys.includes(tecla)) {
+        agregar(tecla);
+      } else if (tecla === 'Enter') {
+        calcular();
+      } else if (tecla === 'Backspace') {
+        pantalla.value = pantalla.value.slice(0, -1);
       }
+    });
 
-      document.getElementById('pantalla').value = resultado;
-    }
-
-    function cambiarModo(modo) {
-      document.body.className = modo;
-      const botones = document.querySelectorAll('#accesibilidad button');
-      botones.forEach(b => b.setAttribute('aria-pressed', 'false'));
-      document.querySelector(`button[onclick*="${modo}"]`).setAttribute('aria-pressed', 'true');
-    }
-
-    function toggleTextoGrande() {
-      const body = document.body;
-      const btn = document.querySelector('.aumentar');
-      const activado = body.classList.toggle('aumentar-texto');
-      btn.setAttribute('aria-pressed', activado ? 'true' : 'false');
-    }
+    cambiarModo('modo-claro');
   </script>
 </body>
 </html>
