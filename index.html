@@ -1,283 +1,239 @@
-<div id="calculadora-wrapper" style="max-width: 100%; padding: 10px; margin: 20px auto; font-family: Arial, sans-serif; box-sizing: border-box;">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Accesible</title>
+  <style>
+    /* Estilos base */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fff;
+      color: #000;
+    }
 
-  <h2 style="text-align: center;">Calculadora Accesible para personas con Discapacidad Visual</h2>
+    #calculadora-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-  <input type="text" id="pantalla" readonly
-    style="width: 100%; height: 50px; font-size: 22px; margin-bottom: 10px; text-align: right; padding: 10px; border-radius: 5px; border: 1px solid #ccc; background-color:#f4f4f4;"
-    aria-label="Pantalla de resultados">
+    h2 {
+      text-align: center;
+    }
 
-  <div id="botones" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-bottom: 20px;">
+    #pantalla {
+      width: 100%;
+      height: 50px;
+      font-size: 22px;
+      margin-bottom: 10px;
+      text-align: right;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #f4f4f4;
+    }
 
-    <!-- Botones (igual que antes) -->
-    <button onclick="agregar('(')" aria-label="Paréntesis de apertura">(</button>
-    <button onclick="agregar(')')" aria-label="Paréntesis de cierre">)</button>
-    <button onclick="funcion('pi')" aria-label="Número pi">Pi</button>
-    <button onclick="funcion('e')" aria-label="Constante e">exponente</button>
-    <button onclick="funcion('ln')" aria-label="Logaritmo natural">Log natural</button>
-    <button onclick="funcion('log10')" aria-label="Logaritmo base diez">Log diez</button>
-
-    <button onclick="funcion('sin')" aria-label="Seno">Seno</button>
-    <button onclick="funcion('cos')" aria-label="Coseno">Coseno</button>
-    <button onclick="funcion('tan')" aria-label="Tangente">Tangente</button>
-    <button onclick="funcion('sqrt')" aria-label="Raíz cuadrada">Raíz</button>
-    <button onclick="funcion('factorial')" aria-label="Factorial">Factorial</button>
-    <button onclick="limpiar()" aria-label="Borrar todo">Borrar</button>
-
-    <button onclick="agregar('7')" aria-label="Siete">7</button>
-    <button onclick="agregar('8')" aria-label="Ocho">8</button>
-    <button onclick="agregar('9')" aria-label="Nueve">9</button>
-    <button onclick="agregar('/')" aria-label="Dividir">Dividir</button>
-    <button onclick="funcion('porcentaje')" aria-label="Porcentaje">Porcentaje</button>
-    <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">Mas Menos</button>
-
-    <button onclick="agregar('4')" aria-label="Cuatro">4</button>
-    <button onclick="agregar('5')" aria-label="Cinco">5</button>
-    <button onclick="agregar('6')" aria-label="Seis">6</button>
-    <button onclick="agregar('*')" aria-label="Multiplicar">Multiplicar</button>
-    <button onclick="agregar('**')" aria-label="Potencia">Potencia</button>
-    <button onclick="funcion('exp')" aria-label="Exponencial">Exponencial</button>
-
-    <button onclick="agregar('1')" aria-label="Uno">1</button>
-    <button onclick="agregar('2')" aria-label="Dos">2</button>
-    <button onclick="agregar('3')" aria-label="Tres">3</button>
-    <button onclick="agregar('-')" aria-label="Restar">Menos</button>
-    <button onclick="agregar('0')" aria-label="Cero">0</button>
-    <button onclick="agregar('.')" aria-label="Punto decimal">.</button>
-    <button onclick="agregar('+')" aria-label="Sumar">+</button>
-    <button onclick="calcular()" aria-label="Calcular resultado">=</button>
-  </div>
-
-  <div id="accesibilidad" style="text-align: center; margin-bottom: 20px;">
-    <p><strong>Modos de accesibilidad:</strong></p>
-    <button onclick="cambiarModo('modo-claro')" aria-pressed="true" aria-label="Modo claro">Claro</button>
-    <button onclick="cambiarModo('alto-contraste')" aria-pressed="false" aria-label="Alto contraste">Alto contraste</button>
-    <button onclick="cambiarModo('modo-sepia')" aria-pressed="false" aria-label="Modo sepia">Sepia</button>
-    <button onclick="cambiarModo('contraste-negro-blanco')" aria-pressed="false" aria-label="Contraste negro y blanco">Negro/Blanco</button>
-    <button onclick="cambiarModo('contraste-amarillo-negro')" aria-pressed="false" aria-label="Contraste amarillo y negro">Amarillo/Negro</button>
-    <button class="aumentar" onclick="toggleTextoGrande()" aria-pressed="false" aria-label="Aumentar tamaño de texto">Aumentar texto</button>
-  </div>
-
-</div>
-
-<footer style="text-align: center; margin-top: 40px; font-family: Arial, sans-serif; font-size: 14px; color: #555;">
-  <p>Esta herramienta es de libre uso, cualquier apoyo al siguiente link:</p>
-  <a href="https://www.paypal.com/ncp/payment/K43R5RQY5GP8G" target="_blank" rel="noopener noreferrer" aria-label="Donar vía PayPal" style="font-weight: bold; color: #0070ba;">Donar vía PayPal</a><br />
-  <small>Creado por Luis Eduardo Monreal</small>
-</footer>
-
-<style>
-  #calculadora-wrapper button {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background: #444;
-    color: white;
-    cursor: pointer;
-  }
-
-  #calculadora-wrapper button:hover {
-    background: #666;
-  }
-
-  #accesibilidad button {
-    margin: 4px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1.5px solid #666;
-    background: #eee;
-    color: #333;
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  #accesibilidad button[aria-pressed="true"] {
-    background: #333;
-    color: #fff;
-  }
-
-  #accesibilidad button.aumentar {
-    background: #0070ba;
-    color: white;
-    border-color: #005a8f;
-  }
-
-  #accesibilidad button.aumentar[aria-pressed="true"] {
-    background: #005a8f;
-  }
-
-  body.modo-claro {
-    background-color: #fff;
-    color: #000;
-  }
-
-  body.alto-contraste {
-    background-color: black;
-    color: yellow;
-  }
-
-  body.modo-sepia {
-    background-color: #f4ecd8;
-    color: #5b4636;
-  }
-
-  body.contraste-negro-blanco {
-    background-color: black;
-    color: white;
-  }
-
-  body.contraste-amarillo-negro {
-    background-color: yellow;
-    color: black;
-  }
-
-  body.aumentar-texto {
-    font-size: 130% !important;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
     #botones {
-      grid-template-columns: repeat(4, 1fr);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+      gap: 5px;
+      margin-bottom: 20px;
+    }
+
+    #botones button {
+      padding: 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      background: #444;
+      color: white;
+      cursor: pointer;
+    }
+
+    #botones button:hover {
+      background: #666;
+    }
+
+    #accesibilidad {
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     #accesibilidad button {
-      font-size: 14px;
-      padding: 6px 10px;
+      margin: 4px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1.5px solid #666;
+      background: #eee;
+      color: #333;
+      cursor: pointer;
+      font-weight: 600;
     }
 
-    #calculadora-wrapper h2 {
-      font-size: 18px;
+    #accesibilidad button[aria-pressed="true"] {
+      background: #333;
+      color: #fff;
     }
 
-    #pantalla {
-      font-size: 20px;
-      height: 45px;
+    #accesibilidad button.aumentar {
+      background: #0070ba;
+      color: white;
+      border-color: #005a8f;
     }
 
-    #calculadora-wrapper button {
-      font-size: 14px;
+    #accesibilidad button.aumentar[aria-pressed="true"] {
+      background: #005a8f;
+    }
+
+    /* Modos de accesibilidad */
+    body.modo-claro {
+      background-color: #fff;
+      color: #000;
+    }
+
+    body.alto-contraste {
+      background-color: black;
+      color: yellow;
+    }
+
+    body.modo-sepia {
+      background-color: #f4ecd8;
+      color: #5b4636;
+    }
+
+    body.contraste-negro-blanco {
+      background-color: black;
+      color: white;
+    }
+
+    body.contraste-amarillo-negro {
+      background-color: yellow;
+      color: black;
+    }
+
+    body.aumentar-texto {
+      font-size: 130% !important;
+    }
+
+    /* Tabla de accesos rápidos */
+    #tabla-accesos {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    #tabla-accesos th, #tabla-accesos td {
+      border: 1px solid #ccc;
       padding: 8px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    #botones {
-      grid-template-columns: repeat(3, 1fr);
+      text-align: left;
     }
 
-    #pantalla {
-      font-size: 18px;
-      height: 40px;
+    #tabla-accesos th {
+      background-color: #f0f0f0;
     }
 
-    #calculadora-wrapper h2 {
-      font-size: 16px;
-    }
-  }
-</style>
-
-<script>
-  const botonesModo = document.querySelectorAll('#accesibilidad button:not(.aumentar)');
-
-  function cambiarModo(modo) {
-    const modos = ['modo-claro', 'alto-contraste', 'modo-sepia', 'contraste-negro-blanco', 'contraste-amarillo-negro'];
-    modos.forEach(m => document.body.classList.remove(m));
-    document.body.classList.add(modo);
-
-    botonesModo.forEach(boton => {
-      const textoBoton = boton.textContent.toLowerCase().replace(/\s+/g, '').replace(/-/g, '');
-      const modoLimpio = modo.toLowerCase().replace(/-/g, '');
-      boton.setAttribute('aria-pressed', textoBoton.includes(modoLimpio) ? 'true' : 'false');
-    });
-  }
-
-  function toggleTextoGrande() {
-    document.body.classList.toggle('aumentar-texto');
-    const btn = document.querySelector('#accesibilidad button.aumentar');
-    const isPressed = btn.getAttribute('aria-pressed') === 'true';
-    btn.setAttribute('aria-pressed', isPressed ? 'false' : 'true');
-  }
-
-  const pantalla = document.getElementById('pantalla');
-
-  function agregar(valor) {
-    pantalla.value += valor;
-  }
-
-  function limpiar() {
-    pantalla.value = '';
-  }
-
-  function factorial(n) {
-    n = Math.floor(n);
-    if (n < 0) return NaN;
-    if (n === 0 || n === 1) return 1;
-    let res = 1;
-    for (let i = 2; i <= n; i++) res *= i;
-    return res;
-  }
-
-  function funcion(tipo) {
-    try {
-      let valor = eval(pantalla.value || '0');
-      let resultado;
-
-      switch (tipo) {
-        case 'sqrt': resultado = Math.sqrt(valor); break;
-        case 'log10': resultado = Math.log10 ? Math.log10(valor) : Math.log(valor) / Math.LN10; break;
-        case 'ln': resultado = Math.log(valor); break;
-        case 'exp': resultado = Math.exp(valor); break;
-        case 'sin': resultado = Math.sin(valor * Math.PI / 180); break;
-        case 'cos': resultado = Math.cos(valor * Math.PI / 180); break;
-        case 'tan': resultado = Math.tan(valor * Math.PI / 180); break;
-        case 'pi': pantalla.value += Math.PI.toFixed(6); return;
-        case 'e': pantalla.value += Math.E.toFixed(6); return;
-        case 'factorial': resultado = factorial(valor); break;
-        case 'porcentaje': resultado = valor / 100; break;
-        case 'cambioSigno': resultado = -valor; break;
+    /* Responsive */
+    @media (max-width: 600px) {
+      #botones {
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
       }
-      pantalla.value = resultado;
-    } catch {
-      pantalla.value = 'Error';
     }
-  }
+  </style>
+</head>
+<body class="modo-claro">
+  <div id="calculadora-wrapper">
+    <h2>Calculadora Accesible para personas con Discapacidad Visual</h2>
 
-  function calcular() {
-    try {
-      let expr = pantalla.value;
-      expr = expr.replace(/pi/g, Math.PI);
-      expr = expr.replace(/e/g, Math.E);
-      expr = expr.replace(/sqrt/g, 'Math.sqrt');
-      expr = expr.replace(/sin/g, 'Math.sin');
-      expr = expr.replace(/cos/g, 'Math.cos');
-      expr = expr.replace(/tan/g, 'Math.tan');
-      expr = expr.replace(/log10/g, 'Math.log10 || (x => Math.log(x)/Math.LN10)');
-      expr = expr.replace(/ln/g, 'Math.log');
-      expr = expr.replace(/exp/g, 'Math.exp');
+    <input type="text" id="pantalla" readonly aria-label="Pantalla de resultados" />
 
-      let resultado = Function('"use strict";return (' + expr + ')')();
-      pantalla.value = resultado;
-    } catch {
-      pantalla.value = 'Error';
-    }
-  }
+    <div id="botones">
+      <!-- Fila 1 -->
+      <button onclick="agregar('(')" aria-label="Paréntesis de apertura">(</button>
+      <button onclick="agregar(')')" aria-label="Paréntesis de cierre">)</button>
+      <button onclick="funcion('pi')" aria-label="Número pi">π</button>
+      <button onclick="funcion('e')" aria-label="Constante e">e</button>
+      <button onclick="funcion('ln')" aria-label="Logaritmo natural">ln</button>
+      <button onclick="funcion('log10')" aria-label="Logaritmo base diez">log</button>
 
-  document.addEventListener('keydown', function(event) {
-    const tecla = event.key;
-    const validKeys = '0123456789+-*/().';
+      <!-- Fila 2 -->
+      <button onclick="funcion('sin')" aria-label="Seno">sin</button>
+      <button onclick="funcion('cos')" aria-label="Coseno">cos</button>
+      <button onclick="funcion('tan')" aria-label="Tangente">tan</button>
+      <button onclick="funcion('asin')" aria-label="Arco seno">asin</button>
+      <button onclick="funcion('acos')" aria-label="Arco coseno">acos</button>
+      <button onclick="funcion('atan')" aria-label="Arco tangente">atan</button>
 
-    if (validKeys.includes(tecla)) {
-      agregar(tecla);
-    } else if (tecla === 'Enter') {
-      calcular();
-    } else if (tecla === 'Backspace') {
-      pantalla.value = pantalla.value.slice(0, -1);
-    }
-  });
+      <!-- Fila 3 -->
+      <button onclick="funcion('sinh')" aria-label="Seno hiperbólico">sinh</button>
+      <button onclick="funcion('cosh')" aria-label="Coseno hiperbólico">cosh</button>
+      <button onclick="funcion('tanh')" aria-label="Tangente hiperbólica">tanh</button>
+      <button onclick="funcion('asinh')" aria-label="Arco seno hiperbólico">asinh</button>
+      <button onclick="funcion('acosh')" aria-label="Arco coseno hiperbólico">acosh</button>
+      <button onclick="funcion('atanh')" aria-label="Arco tangente hiperbólica">atanh</button>
 
-  cambiarModo('modo-claro');
-</script>
+      <!-- Fila 4 -->
+      <button onclick="funcion('sqrt')" aria-label="Raíz cuadrada">√</button>
+      <button onclick="funcion('cbrt')" aria-label="Raíz cúbica">∛</button>
+      <button onclick="funcion('exp')" aria-label="Exponencial">exp</button>
+      <button onclick="funcion('log2')" aria-label="Logaritmo base dos">log₂</button>
+      <button onclick="funcion('abs')" aria-label="Valor absoluto">abs</button>
+      <button onclick="funcion('factorial')" aria-label="Factorial">n!</button>
+
+      <!-- Fila 5 -->
+      <button onclick="agregar('7')" aria-label="Siete">7</button>
+      <button onclick="agregar('8')" aria-label="Ocho">8</button>
+      <button onclick="agregar('9')" aria-label="Nueve">9</button>
+      <button onclick="agregar('/')" aria-label="Dividir">÷</button>
+      <button onclick="funcion('porcentaje')" aria-label="Porcentaje">%</button>
+      <button onclick="funcion('cambioSigno')" aria-label="Cambiar signo">±</button>
+
+      <!-- Fila 6 -->
+      <button onclick="agregar('4')" aria-label="Cuatro">4</button>
+      <button onclick="agregar('5')" aria-label="Cinco">5</button>
+      <button onclick="agregar('6')" aria-label="Seis">6</button>
+      <button onclick="agregar('*')" aria-label="Multiplicar">×</button>
+      <button onclick="agregar('**')" aria-label="Potencia">^</button>
+      <button onclick="limpiar()" aria-label="Borrar todo">C</button>
+
+      <!-- Fila 7 -->
+      <button onclick="agregar('1')" aria-label="Uno">1</button>
+      <button onclick="agregar('2')" aria-label="Dos">2</button>
+      <button onclick="agregar('3')" aria-label="Tres">3</button>
+      <button onclick="agregar('-')" aria-label="Restar">−</button>
+      <button onclick="agregar('0')" aria-label="Cero">0</button>
+      <button onclick="agregar('.')" aria-label="Punto decimal">.</button>
+      <button onclick="agregar('+')" aria-label="Sumar">+</button>
+      <button onclick="calcular()" aria-label="Calcular resultado">=</button>
+    </div>
+
+    <div id="accesibilidad">
+      <p><strong>Modos de accesibilidad:</strong></p>
+      <button onclick="cambiarModo('modo-claro')" aria-pressed="true" aria-label="Modo claro">Claro</button>
+      <button onclick="cambiarModo('alto-contraste')" aria-pressed="false" aria-label="Alto contraste">Alto contraste</button>
+      <button onclick="cambiarModo('modo-sepia')" aria-pressed="false" aria-label="Modo sepia">Sepia</button>
+      <button onclick="cambiarModo('contraste-negro-blanco')" aria-pressed="false" aria-label="Contraste negro y blanco">Negro/Blanco</button>
+      <button onclick="cambiarModo('contraste-amarillo-negro')" aria-pressed="false" aria-label="Contraste amarillo y negro">Amarillo/Negro</button>
+      <button class="aumentar" onclick="toggleTextoGrande()" aria-pressed="false" aria-label="Aumentar tamaño de texto">Aumentar texto</button>
+    </div>
+
+    <table id="tabla-accesos">
+      <thead>
+        <tr>
+          <th>Función</th>
+          <th>Tecla(s)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Seno</td><td>S</td></tr>
+        <tr><td>Coseno</td><td>C</td></tr>
+        <tr><td>Tangente</td><td>T</td></tr>
+        <tr><td>Arco Seno</td><td>Shift + S</td></tr>
+        <tr
+::contentReference[oaicite:5]{index=5}
+ 
+
 
 
 
