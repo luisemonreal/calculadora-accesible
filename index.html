@@ -256,11 +256,13 @@
 
   document.addEventListener('keydown', function(event) {
     const tecla = event.key;
+    const code = event.code;
     const validKeys = '0123456789+-*/().';
 
     if (validKeys.includes(tecla)) {
       agregar(tecla);
-    } else if (tecla === 'Enter') {
+    } else if (tecla === 'Enter' || code === 'NumpadEnter') {
+      event.preventDefault();
       calcular();
     } else if (tecla === 'Backspace') {
       pantalla.value = pantalla.value.slice(0, -1);
@@ -274,8 +276,20 @@
   cambiarModo('modo-claro');
 </script>
 
-
-
+<div id="tabla-atajos-container" style="max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+  <h3 style="text-align: center;">Tabla de Atajos de Teclado y Descripciones</h3>
+  <table id="tabla-atajos" border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+    <thead style="background-color: #444; color: white;">
+      <tr>
+        <th style="padding: 8px;">Tecla / Combinación</th>
+        <th style="padding: 8px;">Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Filas generadas por JavaScript -->
+    </tbody>
+  </table>
+</div>
 
 
 
