@@ -290,7 +290,35 @@
     </tbody>
   </table>
 </div>
+const atajos = [
+  { tecla: '0-9', descripcion: 'Números para ingresar valores' },
+  { tecla: '+ - * / ( ) .', descripcion: 'Operadores matemáticos básicos' },
+  { tecla: 'Enter o NumpadEnter', descripcion: 'Calcular resultado' },
+  { tecla: 'Backspace', descripcion: 'Borrar último carácter' },
+  { tecla: 'Alt + n', descripcion: 'Calcular combinación (nCr) usando formato "n,r"' },
+  { tecla: 'Alt + r', descripcion: 'Calcular permutación (nPr) usando formato "n,r"' },
+  { tecla: 'Botones de la calculadora', descripcion: 'Ejecutan funciones y agregan símbolos' },
+  { tecla: 'Botón "Borrar"', descripcion: 'Limpiar toda la pantalla' },
+  { tecla: 'Botones de modo accesibilidad', descripcion: 'Cambiar colores y tamaño de texto' },
+];
 
+function llenarTablaAtajos() {
+  const tbody = document.querySelector('#tabla-atajos tbody');
+  atajos.forEach(({ tecla, descripcion }) => {
+    const fila = document.createElement('tr');
+    const tdTecla = document.createElement('td');
+    tdTecla.textContent = tecla;
+    tdTecla.style.padding = '8px';
+    const tdDesc = document.createElement('td');
+    tdDesc.textContent = descripcion;
+    tdDesc.style.padding = '8px';
+    fila.appendChild(tdTecla);
+    fila.appendChild(tdDesc);
+    tbody.appendChild(fila);
+  });
+}
+
+llenarTablaAtajos();
 
 
 
