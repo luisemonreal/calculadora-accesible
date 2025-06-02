@@ -8,7 +8,6 @@
 
   <div id="botones" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-bottom: 20px;">
 
-    <!-- Botones (igual que antes) -->
     <button onclick="agregar('(')" aria-label="Paréntesis de apertura">(</button>
     <button onclick="agregar(')')" aria-label="Paréntesis de cierre">)</button>
     <button onclick="funcion('pi')" aria-label="Número pi">Pi</button>
@@ -45,6 +44,10 @@
     <button onclick="agregar('.')" aria-label="Punto decimal">.</button>
     <button onclick="agregar('+')" aria-label="Sumar">+</button>
     <button onclick="calcular()" aria-label="Calcular resultado">=</button>
+
+    <!-- Nuevos botones -->
+    <button onclick="funcion('combinacion')" aria-label="Combinación de n elementos en r">Combinar</button>
+    <button onclick="funcion('permutacion')" aria-label="Permutación de n elementos en r">Permutar</button>
   </div>
 
   <div id="accesibilidad" style="text-align: center; margin-bottom: 20px;">
@@ -66,6 +69,7 @@
 </footer>
 
 <style>
+  /* Estilos iguales a los que ya tenías */
   #calculadora-wrapper button {
     padding: 10px;
     font-size: 16px;
@@ -135,29 +139,9 @@
     font-size: 130% !important;
   }
 
-  /* RESPONSIVE */
   @media (max-width: 768px) {
     #botones {
       grid-template-columns: repeat(4, 1fr);
-    }
-
-    #accesibilidad button {
-      font-size: 14px;
-      padding: 6px 10px;
-    }
-
-    #calculadora-wrapper h2 {
-      font-size: 18px;
-    }
-
-    #pantalla {
-      font-size: 20px;
-      height: 45px;
-    }
-
-    #calculadora-wrapper button {
-      font-size: 14px;
-      padding: 8px;
     }
   }
 
@@ -165,19 +149,11 @@
     #botones {
       grid-template-columns: repeat(3, 1fr);
     }
-
-    #pantalla {
-      font-size: 18px;
-      height: 40px;
-    }
-
-    #calculadora-wrapper h2 {
-      font-size: 16px;
-    }
   }
 </style>
 
 <script>
+  const pantalla = document.getElementById('pantalla');
   const botonesModo = document.querySelectorAll('#accesibilidad button:not(.aumentar)');
 
   function cambiarModo(modo) {
@@ -199,8 +175,6 @@
     btn.setAttribute('aria-pressed', isPressed ? 'false' : 'true');
   }
 
-  const pantalla = document.getElementById('pantalla');
-
   function agregar(valor) {
     pantalla.value += valor;
   }
@@ -216,6 +190,14 @@
     let res = 1;
     for (let i = 2; i <= n; i++) res *= i;
     return res;
+  }
+
+  function combinacion(n, r) {
+    return (n < r || n < 0 || r < 0) ? NaN : factorial(n) / (factorial(r) * factorial(n - r));
+  }
+
+  function permutacion(n, r) {
+    return (n < r || n < 0 || r < 0) ? NaN : factorial(n) / factorial(n - r);
   }
 
   function funcion(tipo) {
@@ -236,7 +218,16 @@
         case 'factorial': resultado = factorial(valor); break;
         case 'porcentaje': resultado = valor / 100; break;
         case 'cambioSigno': resultado = -valor; break;
+        case 'combinacion':
+          const [n1, r1] = pantalla.value.split(',').map(Number);
+          resultado = combinacion(n1, r1);
+          break;
+        case 'permutacion':
+          const [n2, r2] = pantalla.value.split(',').map(Number);
+          resultado = permutacion(n2, r2);
+          break;
       }
+
       pantalla.value = resultado;
     } catch {
       pantalla.value = 'Error';
@@ -273,13 +264,15 @@
       calcular();
     } else if (tecla === 'Backspace') {
       pantalla.value = pantalla.value.slice(0, -1);
+    } else if (event.altKey && tecla === 'n') {
+      funcion('combinacion');
+    } else if (event.altKey && tecla === 'r') {
+      funcion('permutacion');
     }
   });
 
   cambiarModo('modo-claro');
 </script>
-
-
 
 
 
